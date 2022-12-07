@@ -1,8 +1,8 @@
-public class BubbleSorter implements Sorter {
+public class ShellSorter implements Sorter {
 
     private int[] digitMassive;
 
-    public BubbleSorter(int length) {
+    public ShellSorter(int length) {
 
         digitMassive = new int[length];
 
@@ -13,10 +13,10 @@ public class BubbleSorter implements Sorter {
 
     @Override
     public void sort() {
-        for (int j = digitMassive.length - 1; j >= 0; j--) {
-            for (int i = 0; i < j; i++) {
-                if (digitMassive[i] > digitMassive[i + 1]) {
-                    swap(i, i + 1);
+        for (int gap = digitMassive.length / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < digitMassive.length; i++) {
+                for (int j = i; j > gap && digitMassive[j - gap] > digitMassive[j]; j -= gap) {
+                    swap(j, j - gap);
                 }
             }
         }
